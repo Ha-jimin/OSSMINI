@@ -1,1 +1,2 @@
-*.o market
+*.obj
+market
