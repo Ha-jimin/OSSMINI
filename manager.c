@@ -13,6 +13,8 @@ int selectMenu(){
     scanf("%d", &menu);
     return menu;
 }
+
+
 void listProduct(Product *p,int count){
 
     printf("\nNo. Name          weight price\n");
@@ -40,7 +42,12 @@ void saveData(Product p[], int count){
 
 	//중량 가격 제품명
 	fp= fopen("product.txt","wt");
-	
+	for(int i = 0; i < count ; i++){
+		if(p[i].name == NULL)continue;
+		else{
+			fprintf(fp, "%s %d %d", p[i].name, p[i].weight, p[i].price);
+		}
+	}
 	
 	fclose(fp);
 	printf("저장됨!\n");
@@ -51,12 +58,15 @@ void saveData(Product p[], int count){
 int loadData(Product *p){
 	int count=0;
 	FILE*fp;
-
+	fp = fopen("product.txt", "rt");
 	//파일 내용을 읽어와서 배열에 값 추가하기
+	for(int i = 0 ; i < 100; i++){
+	if(feof(fp))break;
+	count++;
+	fscanf(fp, "%s %d %d", p[i].name, &p[i].weight, &p[i].price);
 
-
-
-
+	}
+	fclose(fp);
 	printf("=> 로딩 성공!\n");
 	return count;
 }
