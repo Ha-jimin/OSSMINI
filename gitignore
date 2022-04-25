@@ -1,2 +1,4 @@
-*.obj
+manager.o
+product.o
 market
+
